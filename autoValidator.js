@@ -314,9 +314,9 @@
 
 					$("form").find("input").each(function(i,e){
 											
-						var vfs = $(this).attr("vfs") ;
-						if(vfs){
-							this._vfs = new Analyse(vfs).analyse();
+						var verify = $(this).attr("verify") ;
+						if(verify){
+							this._verify = new Analyse(verify).analyse();
 						}
 						
 					});
@@ -325,13 +325,13 @@
 							var validatorNotFound = [];
 							var retValue = true;
 							$(this).find("input").each(function(i,e){
-								var vfs = this._vfs || [];
-								if(this._vfs){
-									for(var i = 0 ; i < vfs.length ; i++ ){
-										//console.log(vfs[i]);
-										var validator = $x.findValidator(vfs[i]);
+								var verify = this._verify || [];
+								if(this._verify){
+									for(var i = 0 ; i < verify.length ; i++ ){
+										//console.log(verify[i]);
+										var validator = $x.findValidator(verify[i]);
 											if(validator == null){
-												validatorNotFound.push(vfs[i].name);																							
+												validatorNotFound.push(verify[i].name);																							
 											}else{
 												var methodReturn = validator.invock(this);
 												if(!methodReturn){
