@@ -284,6 +284,7 @@
 						 }
 					};
 					$x.validators.error=function(message){
+						var message  = message || "There is a error , please check";
 						alert(message);
 					}
 					
