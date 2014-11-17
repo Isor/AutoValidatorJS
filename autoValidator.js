@@ -1,12 +1,11 @@
 /*
- *
- *  基础JS对象功能扩展
+ * 
+ *  基础JS对象功能扩展 
  */
 
 (function() {
 
-	String.prototype.trim = String.prototype.trim ||
-	function() {
+	String.prototype.trim = String.prototype.trim || function() {
 		return this.replace(/^\s*|\s*$/, '');
 	}
 
@@ -49,7 +48,7 @@
 	}
 	$x.getEffect = function() {
 		var configEffect = $x.validators.config.effect || 'base';
-		var selectEffect = $x.validators[configEffect];
+		var selectEffect = $x.validators.effect[configEffect];
 		return selectEffect ? selectEffect : $x.validators.effect.base;
 	}
 	/*
@@ -79,7 +78,8 @@
 	$x.validators.exec = function(validatorMeta, ele) {
 		var validatorWrapper = $x.validators.findValidator(validatorMeta, ele);
 		if (!validatorWrapper) {
-			console.log("ERROR: Validator name#" + validatorMeta.name + " not found!");
+			console.log("ERROR: Validator name#" + validatorMeta.name
+					+ " not found!");
 			return false;
 		}
 		var effect = $x.getEffect();
@@ -94,31 +94,31 @@
 		}
 
 	}
+
 })();
 
 /*
- *
+ * 
  * 校验器模块定义
- *
+ * 
  */
 (function($) {
+	
+	
 
 	/* 判断char 是否为字母 */
 	function is_char(ch) {
 		return (ch >= 'a' && ch <= 'z') || ('A' <= ch && ch <= 'Z');
 	}
-
 	/* 判断指定的字符可否为 方法首字母 . */
 	function can_be_first(ch) {
 		return is_char(ch) || ch == '$' || ch == '_';
 	}
-
 	;
 	/* 返回字符是否为数字字符 */
 	function is_num(ch) {
 		return '0' <= ch && ch <= "9";
 	}
-
 	function Analyse(express) {
 		var methodParseer = new MethodDefinitionParser(this);
 		this.status = 0;
@@ -126,7 +126,7 @@
 		this.analyse = function() {
 			var hasException = false;
 			try {
-				for ( index = 0; index < express.length; index++) {
+				for (index = 0; index < express.length; index++) {
 					var ch = express.charAt(index);
 					methodParseer.process(ch);
 				}
@@ -142,22 +142,23 @@
 			}
 
 		}
+	
 		/* 解析异常处理方法 */
 		function exceptionHandle() {
-			console.log("Exception : a error parse at '" + express + "' near index " + index);
+			console.log("Exception : a error parse at '" + express
+					+ "' near index " + index);
 		}
 
 	}
-
-
+	
 	$x.Analyse = Analyse;
 
 	/*
-	 *
+	 * 
 	 * 利用 链式 集成方式 不停的 wrapped 加入判断 ， 方便归类, 难道 创建个 对象接收 不是更好么？
-	 *
+	 * 
 	 * 是不是思路受限了？ .
-	 *
+	 * 
 	 */
 	function MethodDefinitionParser(analysor) {
 
@@ -200,6 +201,7 @@
 
 			}
 		}
+
 	}
 
 	/* 名称解析状态 */
@@ -226,7 +228,8 @@
 				if (ch == '(') {
 					return 2;
 				}
-				if (!this.parse_name_status_over && !can_be_first(ch) && !is_num(ch)) {
+				if (!this.parse_name_status_over && !can_be_first(ch)
+						&& !is_num(ch)) {
 					throw "Unexcept char " + ch;
 				}
 				if (can_be_first(ch) || is_num(ch)) {
@@ -371,6 +374,7 @@
 			return o;
 
 		}
+
 	}
 
 	/* 参数预处理函数, 将参数转化为字符串 或数字 ，暂时不支持 true / false 转换. */
@@ -385,9 +389,9 @@
 })();
 
 /*
- *
+ * 
  * 校验应用模块
- *
+ * 
  */
 (function() {
 
@@ -410,7 +414,7 @@
 					if (this._verify) {
 						for (var i = 0; i < verify.length; i++) {
 							// console.log(verify[i]);
-							methodReturn = $x.validators.exec(verify[i], this);
+							methodReturn = $x.validators.exec(verify[i],this);
 							if (!methodReturn) {
 								retValue = false;
 							}
@@ -420,7 +424,7 @@
 					}
 
 				});
-
+				
 				return false;
 				;
 			});
@@ -429,4 +433,4 @@
 
 	});
 
-})(); 
+})();
