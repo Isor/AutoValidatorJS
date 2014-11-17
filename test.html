@@ -1,50 +1,29 @@
 <html>
-
-	
 	<head>
-		<title>1</title>
+		<title>Auto Validator Test</title>
 		<script type="text/javascript" src="./libs/jquery.js"></script>
 		<script type="text/javascript" src="./autoValidator.js"></script>	
 
 		<script type="text/javascript">
-
-
-
 				$x.validators.error = function (mess){
-
-
-					alert(1+""+mess);
+					alert(this.id +""+mess);
 				}
-
-
-
-
-
-
-
 		</script>
-
-
 	</head>
 	<body>
 
 			<form>
 
-					<input vfs="required "/>	
 
-					<input vfs="required length(2,5)"/>	
+					<input id="in1" verify="required length(2,5)"/>	
+
+
+					<input id="in2" verify="required length(2,5)"/>
+
+					<input id="in3" verify="required length(2,5)"/>
 
 					<input  type="submit" value="Submit"/>	
 
 			</form>
-
-
-
-
-
 	</body>	
-
-
-
-
 </html>
