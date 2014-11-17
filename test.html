@@ -5,9 +5,15 @@
 		<script type="text/javascript" src="./autoValidator.js"></script>	
 
 		<script type="text/javascript">
-				$x.validators.error = function (mess){
-					alert(this.id +""+mess);
-				}
+			$x.validators.config.effect="myDesign";
+			$x.validators.effect.myDesign = {
+					error : function(message) {
+						alert("1 required")
+					},
+					success : function() {
+	
+					}
+			}
 		</script>
 	</head>
 	<body>
