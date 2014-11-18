@@ -1,35 +1,33 @@
+<!DOCTYPE html>
 <html>
-	<head>
+<head>
+<meta charset="UTF-8">
+
 		<title>Auto Validator Test</title>
 		<script type="text/javascript" src="./libs/jquery.js"></script>
-		<script type="text/javascript" src="./autoValidator.js"></script>	
+		<script type="text/javascript" src="./jValidator.js"></script>
+		<script type="text/javascript" src="./jValidator.validators.js"></script>
+		<script type="text/javascript" src="./jValidator.effects.js"></script>
 
 		<script type="text/javascript">
-			$x.validators.config.effect="myDesign";
-			$x.validators.effect.myDesign = {
-					error : function(message) {
-						alert("1 required")
-					},
-					success : function() {
-	
-					}
-			}
+				$x.validators.config.effect = "lc"
 		</script>
 	</head>
 	<body>
-
-			<form>
-
-
-					<input id="in1" verify="required"/>	
-
-
-					<input id="in2" verify="required length(2,5)"/>
-
-					<input id="in3" verify="required length(2,5)"/>
-
-					<input  type="submit" value="Submit"/>	
-
-			</form>
-	</body>	
+		<form>
+			请输入测试参数1：<input id="in1" verify="required number" style="margin: 20px;"/>
+			
+			<br/>
+			
+			请输入测试参数2：<input id="in2" verify="required number" style="margin: 20px;"/>
+			
+			<br/>
+			
+			请输入测试参数3：<input id="in3" verify="required number" style="margin: 20px;"/>
+			
+			<br/>
+			
+			<input  type="submit" value="Submit"/>
+		</form>
+	</body>
 </html>
