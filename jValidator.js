@@ -486,6 +486,7 @@
 		});
 		$("form").each(function(i, e) {
 			$(this).submit(function() {
+				$x.validators.effect.base.isFocus = false;
 				var validatorNotFound = [];
 				var retValue = true;
 				$(this).find("input").each(function(i, e) {
