@@ -77,7 +77,6 @@
 			var value = $(this).val();
 			return value.length >= minLength;
 		}
-		
 	};
 	
 	/**
