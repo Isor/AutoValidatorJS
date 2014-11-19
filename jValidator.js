@@ -15,7 +15,6 @@
  * $x log 模块 ( 真的是需要一个好的js模块载入器)
  * 
  */
-
 (function() {
 
 	var $x = window.$x || (window.$x = {});
@@ -30,7 +29,8 @@
 	 */
 	$x.log.isDebug = function() {
 		return $x.log.config.debug;
-	}
+	};
+	
 	/*
 	 * 是否输出 消息
 	 */
@@ -43,7 +43,7 @@
 	 */
 	$x.log.isError = function() {
 		return $x.log.config.error;
-	}
+	};
 
 	/*
 	 * 输出调试信息
@@ -53,12 +53,14 @@
 			log(message);
 		}
 	};
+	
 	/*
 	 * 输出提示信息
 	 */
 	$x.log.info = function(message) {
 		log(message);
-	}
+	};
+	
 	/*
 	 * 输出错误信息
 	 */
@@ -66,22 +68,18 @@
 		if ($x.log.isError()) {
 			alert(message);
 		}
-	}
+	};
 
 	function _alert(message) {
-
 		alert(message);
-
 	}
 
 	function log(message) {
-
 		if (console && console.log) {
-			console.log(message)
+			console.log(message);
 		} else {
 			alert(message);
 		}
-
 	}
 
 })();
@@ -111,7 +109,6 @@
 			alert(message);
 		},
 		success : function() {
-
 		}
 	};
 
@@ -151,7 +148,7 @@
 		if (!validatorWrapper) {
 			if ($x.log.isError()) {
 				$x.log.error("ERROR: Validator name#" + validatorMeta.name
-						+ " not found!")
+						+ " not found!");
 			}
 			return false;
 		}
@@ -172,15 +169,13 @@
 	 * 通过名称调用其他校验器, 如果指定名称的校验器不存在返回 false. 否则返回其执行结果。
 	 */
 	$x.validators.call = function(ele, validatorName, arg1, arg2) {
-
 		var validator = $x.validators[validatorName];
 		if (!validator) {
 			return false;
 		}
 		var args = Array.prototype.slice.call(arguments, 2);
 		return validator.method.apply(ele, args);
-
-	}
+	};
 
 	/* 参数预处理函数, 将参数转化为字符串 或数字 ，暂时不支持 true / false 转换. */
 	function preprocessing(str) {
@@ -270,7 +265,6 @@
 				methods.push(currentStatus.getValue());
 				currentStatus.finished = true;
 			}
-
 		};
 
 		this.process = function(ch) {
