@@ -1,0 +1,44 @@
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+		<script type="text/javascript" src="./libs/jquery.js"></script>
+		<script type="text/javascript" src="./libs/jquery.js"></script>
+		<script type="text/javascript" src="./jValidator.js"></script>
+		<script type="text/javascript" src="./jValidator.validators.js"></script>
+		<script type="text/javascript" src="./jValidator.effects.js"></script>
+
+		<script type="text/javascript">
+				$x.validators.config.effect = "lc";
+
+				$(function(){
+
+
+					$("body").click(function(){
+						if(this.__init){return;}
+						this.__init = true;
+
+					var str='<form>	请输入测试参数1：<input id="in1" verify="required number" style="margin: 20px;"/><br/>'+
+					'请输入测试参数2：<input id="in2" verify="required number" style="margin: 20px;"/>'+
+					'<br/>请输入测试参数3：<input id="in3" verify="required number" style="margin: 20px;"/>'+
+					'<br/><input  type="submit" value="Submit"/></form>';
+
+						$(str).appendTo($(this));
+
+
+					});
+
+				});
+		</script>
+	</head>
+	<body style="width:100%; height:100%; background:#ccc;">
+
+
+
+
+
+	</body>	
+
+
+</html>

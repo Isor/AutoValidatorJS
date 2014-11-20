@@ -477,23 +477,38 @@
  * 
  */
 (function() {
-	$(function() {
+
+	function scanAndInitInput(form){
 		$("form").find("input").each(function(i, e) {
-			var verify = $(this).attr("verify");
-			if (verify) {
-				this._verify = new $x.Analyse(verify).analyse();
-			}
+			parseVerifies(this);
 		});
-		$("form").each(function(i, e) {
-			$(this).submit(function() {
+	}
+	/* 
+		 解析和初始化单个input的_verify 属性
+	*/
+	function parseVerifies(input){
+		var verify = $(input).attr("verify");
+		if (verify && !this._verrify_init) {
+			input._verify = new $x.Analyse(verify).analyse();
+			input._verrify_init = true;
+		}
+	}
+
+	$(function() {
+		scanAndInitInput();
+
+		$("body").delegate("form","submit",function(){
+
 				$x.validators.effect.base.isFocus = false;
 				var validatorNotFound = [];
 				var retValue = true;
 				$(this).find("input").each(function(i, e) {
+					if(!this._verrify_init){
+						parseVerifies(this);	
+					}
 					var verify = this._verify || [];
 					if (this._verify) {
 						for (var i = 0; i < verify.length; i++) {
-
 							methodReturn = $x.validators.exec(verify[i], this);
 							if (!methodReturn) {
 								retValue = false;
@@ -502,7 +517,7 @@
 					} // end of if(this._verify)
 				});
 				return methodReturn;
-			});
-		}); // end of $("form").each(function(i, e)
+		});
+		
 	});
 })();
