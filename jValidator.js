@@ -478,10 +478,39 @@
  */
 (function() {
 
-	function scanAndInitInput(form){
-		$("form").find("input").each(function(i, e) {
-			parseVerifies(this);
+
+	/*
+	   获得指定元素的输入元素的校验器信息
+	 */
+	function obtainVerify(input){
+		if(!input._verrify_init){
+			parseVerifies(input);	
+		}
+		return input._verify || [];
+	}
+	/*
+		扫描并预初始化现有input元素的校验信息
+	*/
+
+	function openBlurListener(){
+		$("form").delegate("input , select ","blur",function(){
+			var verify = obtainVerify(this);
+				for (var i = 0; i < verify.length; i++) {
+					methodReturn = $x.validators.exec(verify[i], this);
+					if (!methodReturn) {
+						retValue = false;
+				}
+				
+			}	
 		});
+	}
+	/*
+		初始化 基本元素的校验信息
+	*/
+	function initElementVerify(){
+		$("form").find("input , select").each(function(i, e) {
+			parseVerifies(this);
+		});	
 	}
 	/* 
 		 解析和初始化单个input的_verify 属性
@@ -495,29 +524,27 @@
 	}
 
 	$(function() {
-		scanAndInitInput();
-
+		initElementVerify();
+		if( $x.validators.config.blur){
+			openBlurListener();
+		}
 		$("body").delegate("form","submit",function(){
-
 				$x.validators.effect.base.isFocus = false;
 				var validatorNotFound = [];
 				var retValue = true;
-				$(this).find("input").each(function(i, e) {
-					if(!this._verrify_init){
-						parseVerifies(this);	
-					}
-					var verify = this._verify || [];
-					if (this._verify) {
+				$(this).find("input ,select").each(function(i, e) {
+					var verify = obtainVerify(this);
+
 						for (var i = 0; i < verify.length; i++) {
 							methodReturn = $x.validators.exec(verify[i], this);
 							if (!methodReturn) {
 								retValue = false;
 							}
-						}
-					} // end of if(this._verify)
+						} // end of if(this._verify)
 				});
-				return methodReturn;
+				return retValue;
 		});
+
 		
 	});
 })();
