@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Index</title>
+
+		<link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+		<style type="text/css">
+
+		  *,body,span,h1,h2,h3,h4,h5,h6,p,div,a,input,select{
+			  	font-size: 12px;
+			  	font-family: "微软雅黑"
+		  }
+
+		</style>
+		<script src="../../libs/jquery.js"></script>
+		<script type="text/javascript" src="../../jValidator.js"></script>
+		<script type="text/javascript" src="../../jValidator.validators.js"></script>
+		<script type="text/javascript" src="../../jValidator.effects.js"></script>
+		<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+
+				$x.validators.effect.bootstrap={
+
+					error:function(message){
+						$(this).parent(".form-group").removeClass("has-success");
+						$(this).parent(".form-group").addClass("has-error");
+					},
+					success:function(message){
+						$(this).parent(".form-group").removeClass("has-error");
+						$(this).parent(".form-group").addClass("has-success");	
+					}
+				}
+
+				$x.validators.config.effect = "bootstrap";
+
+				$x.validators.config.blur = true;
+
+
+
+		</script>
+	</head>
+	<body>
+
+
+		<form class="form-inline" style=" margin-top:20px; ">
+
+			<div class="form-group">
+				
+				<label>姓名</label>	
+				<input class="form-control" type="text" verify="required " />
+
+			</div>
+
+			<div class="form-group">
+
+				<label>年龄</label>	
+				<input class="form-control"   type="text" verify="required number"/>
+
+			</div>
+			<div class="form-group">
+
+				<label>毕业学校</label>	
+				<select class="form-control"  verify="required ">
+					 <option value="">请选择学校</option>
+					 <option value="01">江西师范大学</option>
+					 <option value="02">南昌大学</option>
+				</select>
+
+			</div>
+
+
+
+
+			    <button type="submit" class="btn btn-primary">Submit</button>
+
+		</form>
+
+
+
+
+
+
+	</body>
+</html>
